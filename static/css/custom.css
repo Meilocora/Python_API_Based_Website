@@ -1,0 +1,17 @@
+#img-header {
+    border-radius: 25px;
+}
+
+#user-inputs {
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-card {
+    height: 5rem;
+}
+
+.img-card {
+    height: 250px;
+}

@@ -1,0 +1,55 @@
+{% include "header.html" %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for hotel in hotels %}
+            <div class="col">
+              <div class="card shadow-sm">
+                <h4 class="card-title text-center header-card py-3"><a href="{{ hotel.link }}" target="_blank" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">{{ hotel.title }}</a></h4>
+
+                  <!-- CAROUSEL BEGIN -->
+                      <div id="{{ hotel.id }}" class="carousel slide">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{{ hotel.images[0] }}" class="d-block w-100 img-card" alt="...">
+                          </div>
+                            {% for image in hotel.images[1:] %}
+                          <div class="carousel-item">
+                            <img src="{{ image }}" class="d-block w-100 img-card" alt="{{ hotel.title }}">
+                          </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#{{ hotel.id }}" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#{{ hotel.id }}" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                      <!-- CAROUSEL END -->
+
+                  <div class="card-body">
+                  <p class="card-text fs-6">Located at {{ hotel.info }}</p>
+                    <p class="card-text fs-6">Provided by {{ hotel.provider }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    {% if hotel.rating['rating'] >= 4: %}
+                      <span class="badge text-bg-success fs-6">Rating: {{ hotel.rating['rating'] }} ({{ hotel.rating['count'] }})</span>
+                    {% elif hotel.rating['rating'] >= 2: %}
+                      <span class="badge text-bg-warning fs-6">Rating: {{ hotel.rating['rating'] }} ({{ hotel.rating['count'] }})</span>
+                    {% else: %}
+                      <span class="badge text-bg-danger fs-6">Rating: {{ hotel.rating['rating'] }} ({{ hotel.rating['count'] }})</span>
+                    {% endif %}
+                    <span class="badge text-bg-info fs-6">Price: {{ hotel.price }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
